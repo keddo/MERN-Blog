@@ -1,12 +1,15 @@
 import User from '../models/User.model.js'
 import {StatusCodes} from 'http-status-codes'
-import {body, validationResult} from 'express-validator'
+import {validationResult} from 'express-validator'
+// import {errorHandler} from '../utils/errorHandle.js'
+
 export const signup = async (req, res) => {
    // check if attributes are not empty
    const {username, email, password} = req.body;
-   if(!username || !email || !password || username === '' || email === '' || password === ''){
-      return res.status(StatusCodes.BAD_REQUEST).json({msg: 'Missing attributes or empty'})
-   }
+   // if(!username || !email || !password || username === '' || email === '' || password === ''){
+   //    // return res.status(StatusCodes.BAD_REQUEST).json({msg: 'Missing attributes or empty'})
+   //    errorHandler(StatusCodes.BAD_REQUEST, 'All fields are required.')
+   // }
    // Validate user input
    const errors = validationResult(req);
    if (!errors.isEmpty()) {

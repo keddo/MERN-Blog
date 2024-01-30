@@ -8,7 +8,7 @@ const validateUserInput = [
       body('email').isEmail().withMessage('Invalid email address'),
       body('password').isLength({min: 6}).withMessage('Password must be at least 6 characters long')
    ]
-router.post('/signin', signin);
-router.post('/signup',validateUserInput, signup);
+router.post('/sign-in', signin);
+router.post('/sign-up',validateUserInput, signup);
 
 export default router;
