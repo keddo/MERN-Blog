@@ -7,6 +7,7 @@ import Dashboard from './Dashboard'
 import Projects from './Projects'
 import About from './About'
 import Header from './components/Header'
+import FooterCom from './Footer'
 export default function App() {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ export default function App() {
         <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/projects' element={<Projects/>}/>
       </Routes>
+      <FooterCom/>
     </BrowserRouter>
   )
 }
