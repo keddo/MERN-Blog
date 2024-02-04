@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import {Button, Label, TextInput} from 'flowbite-react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import axios from 'axios'
 export default function SignUp() {
   const [formData, setFormData] = useState({})
+
+  const navigate = useNavigate()
   const handleChange = (e) => {
     setFormData({...formData, [e.target.id]: e.target.value})
   }
@@ -15,7 +17,11 @@ export default function SignUp() {
            'Content-Type': 'application/json',
          }
        });
-      const data = await res.json()
+      if (res.status == 201) {
+        // dispatch(signInSuccess(data));
+        console.log(res.data)
+        navigate('/signin');
+      }
     } catch (error) {
       console.error(error.message)
     }

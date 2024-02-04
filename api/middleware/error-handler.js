@@ -20,7 +20,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
         customError.msg = `No item found with id: ${err.value}`
         customError.statusCode = 400
     }
-    return res.status(customError.statusCode).json({msg: customError.msg})
+    return res.status(customError.statusCode).json({success: false, statusCode: customError.statusCode, message: customError.msg})
 }
 
 export default errorHandlerMiddleware

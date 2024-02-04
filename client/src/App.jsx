@@ -1,13 +1,12 @@
-import React from 'react'
 import {Routes, Route, BrowserRouter } from 'react-router-dom'
-import Home from './Home'
-import SignUp from './SignUp'
-import SignIn from './SignIn'
-import Dashboard from './Dashboard'
-import Projects from './Projects'
-import About from './About'
+import Home from './pages/Home'
+import SignUp from './pages/SignUp'
+import SignIn from './pages/SignIn'
+import Dashboard from './pages/Dashboard'
+import Projects from './pages/Projects'
+import About from './pages/About'
 import Header from './components/Header'
-import FooterCom from './Footer'
+import FooterCom from './components/Footer'
 export default function App() {
   return (
     <BrowserRouter>
