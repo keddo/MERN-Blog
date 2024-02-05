@@ -2,6 +2,7 @@ import express from 'express'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import connectDB from './db/connection.js'
+
 // Routes
 import userRoutes from './routes/user.routes.js'
 import authRoutes from './routes/auth.routes.js'

@@ -15,13 +15,17 @@ const userSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
+    profilePicture: {
+        type: String,
+        default: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+    }
 }, {timestamps: true});
 
 // Hash password before saving
 userSchema.pre('save', async function() {
     if (!this.isModified('password')) return;
     const salt = await bcrypt.genSalt(10)
-    this.password = await bcrypt.hash(this.password, salt)
+    this.password = bcrypt.hash(this.password, salt)
 })
 
 // userSchema.methods.createJWT = function() {
