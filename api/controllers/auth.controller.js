@@ -3,6 +3,7 @@ import {StatusCodes} from 'http-status-codes'
 import {validationResult} from 'express-validator'
 import jwt from 'jsonwebtoken'
 import {errorHandler} from '../utils/error.js'
+import { hashPassword } from '../utils/user_utils.js'
 
 export const signup = async (req, res, next) => {
    // check if attributes are not empty
@@ -21,11 +22,12 @@ export const signup = async (req, res, next) => {
       return next(errorHandler(404, 'User already exists.'))
    }
    try {
+   const hashedPassword = await hashPassword(password);
       // add user to db
    await User.create({
       username,
       email,
-      password
+      password: hashedPassword
    });
    // send user response
    res.status(StatusCodes.CREATED).json({msg: 'User registered successfully.'})
@@ -47,7 +49,7 @@ export const signin = async (req, res, next) => {
       }
       const token = jwt.sign({id: validUser._id}, process.env.JWT_SECRET, {expiresIn: '3h'});
       const { password: pass, ...rest } = validUser._doc;
-      res.status(StatusCodes.OK).cookie('access_token', token, {httpOnly: true}).json(rest)
+      res.status(StatusCodes.OK).cookie('access_token', token).json(rest)
    } catch (error) {
       next(error)
    }
