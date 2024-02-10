@@ -5,33 +5,31 @@ import { Link } from 'react-router-dom'
 import { HiOutlineExclamationCircle } from 'react-icons/hi'
 import { set } from 'mongoose'
 
-export default function DashPosts() {
+export default function DashPost() {
   const {currentUser} = useSelector( state => state.user);
   const [userPosts, setUserPosts] = useState([]);
   const [showMore, setShowMore] = useState(true)
   const [showModal, setShowModal] = useState(false);
   const [postIdToDelete, setPostIdToDelete] = useState('');
-
   useEffect(() => {
     const fetchPosts = async () => {
-        try {
-          const res = await fetch(`/api/posts?userId=${currentUser._id}`);
-          const data = await res.json();
-          if(res.ok){
-            setUserPosts(data.posts);
-            if(data.posts.lenght < 9){
-                setShowMore(false);
-            }
+      try {
+        const res = await fetch(`/api/posts?userId=${currentUser._id}`);
+        const data = await res.json();
+        if (res.ok) {
+          setUserPosts(data.posts);
+          if (data.posts.length < 9) {
+            setShowMore(false);
           }
-        } catch (error) {
-          console.log(error.message)
         }
-        if(currentUser.isAdmin){
-            fetchPosts()
-        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    if (currentUser.isAdmin) {
+      fetchPosts();
     }
   }, [currentUser._id]);
-
   const handleShowMore = async () => {
     const startIndex = userPosts.length;
     try {
@@ -67,7 +65,7 @@ export default function DashPosts() {
   }
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
-        {currentUser.isAdmin && userPosts.length > 0 ? (
+        { currentUser.isAdmin && userPosts.length > 0 ? (
             <>
                <Table hoverable className='shadow-md'>
                 <Table.Head>
@@ -80,12 +78,12 @@ export default function DashPosts() {
                       <span>Edit</span>
                     </Table.HeadCell>
                 </Table.Head>
-                {
+                { 
                     userPosts.map((post) => (
-                        <Table.Body className='divide-y'>
+                        <Table.Body className='divide-y' key={post._id}>
                             <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
                               <Table.Cell>
-                                {new Date(post.updateAt).toLocaleDateString()}
+                                {new Date(post.updatedAt).toLocaleDateString()}
                               </Table.Cell>
                               <Table.Cell>
                                 <Link to={`posts/${post.slug}`}>

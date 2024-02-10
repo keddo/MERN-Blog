@@ -7,7 +7,7 @@ import connectDB from './db/connection.js'
 // Routes
 import userRoutes from './routes/user.routes.js'
 import authRoutes from './routes/auth.routes.js'
-import postRoutes from './routes/post.route.js'
+import postRoutes from './routes/post.routes.js'
 import dotenv from 'dotenv'
 dotenv.config()
 import 'express-async-errors'
