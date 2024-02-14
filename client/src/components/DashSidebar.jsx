@@ -1,5 +1,7 @@
 import { Sidebar } from 'flowbite-react';
-import { HiArrowSmRight, HiChartPie, HiInbox, HiUser  } from 'react-icons/hi';
+import { HiAnnotation, HiArrowSmRight, HiChartPie, HiInbox, HiUser  } from 'react-icons/hi';
+import { FaUsers } from "react-icons/fa6";
+
 import { TfiLayoutListPost } from "react-icons/tfi";
 import {useLocation} from 'react-router-dom';
 import {useEffect, useState} from 'react';
@@ -40,13 +42,20 @@ export default function DashSidebar() {
         <Sidebar.ItemGroup>
           {
             currentUser && currentUser.isAdmin && (
-              <Sidebar.Item href="/dashboard" icon={HiChartPie}>
+              <Sidebar.Item 
+              href="/dashboard?tab=dash" 
+              icon={HiChartPie}
+              active={tab === 'dash' || !tab}
+              >
                 Dashboard
               </Sidebar.Item>
             )
           }
-          <Sidebar.Item href="#" icon={HiInbox} label="3">
-            Inbox
+          <Sidebar.Item 
+          href="/dashboard?tab=comments" 
+          icon={HiAnnotation} 
+          label="3">
+            Comments
           </Sidebar.Item>
           {
             currentUser.isAdmin && (
@@ -60,7 +69,7 @@ export default function DashSidebar() {
           }
           {
             currentUser.isAdmin && (
-              <Sidebar.Item href="#" icon={HiUser}>
+              <Sidebar.Item href="/dashboard?tab=users" icon={FaUsers}>
                 Users
               </Sidebar.Item>
             )

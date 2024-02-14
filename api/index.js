@@ -8,6 +8,7 @@ import connectDB from './db/connection.js'
 import userRoutes from './routes/user.routes.js'
 import authRoutes from './routes/auth.routes.js'
 import postRoutes from './routes/post.routes.js'
+import commentRoutes from './routes/comment.routes.js'
 import dotenv from 'dotenv'
 dotenv.config()
 import 'express-async-errors'
@@ -27,6 +28,7 @@ app.use(morgan('dev'))
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
+app.use('/api/comments', commentRoutes);
 // Connect to Database
 
 // Handle not found and Error
