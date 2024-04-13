@@ -5,8 +5,7 @@ This project is a blog web application built using React with Vite for the front
 ## Technologies Used
 
 - **Frontend:**
-  - React
-  - Vite
+  - React + Vite
 
 - **Backend:**
   - Node.js
